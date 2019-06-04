@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>viewer</title>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js"></script>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      var imageExtent = [139.333960169, 41.351645559, 148.894403191,45.557243414];
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url:"https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png",
+                attributions:"<a href='https://maps.gsi.go.jp/development/ichiran.html'>国土地理院</a>",
+            })
+          }),
+          new ol.layer.Image({
+            source: new ol.source.ImageStatic({
+              url: 'Y2019PC01.png',
+              crossOrigin: '',
+              projection: 'EPSG:4326',
+              imageExtent: imageExtent
+            })
+          })
+        ],
+        target: 'map',
+        view: new ol.View({
+          center: [15464730.43665929, 4829293.571257143],
+          zoom: 5
+        })
+      });
+    </script>
+  </body>
+</html>
